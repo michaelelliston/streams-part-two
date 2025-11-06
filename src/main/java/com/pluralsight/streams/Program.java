@@ -31,11 +31,11 @@ public class Program {
         filteredPeople.stream()
                 .forEach(System.out::println);
 
-        int ageSum = people.stream()
+        OptionalDouble averageAge = people.stream()
                 .mapToInt(Person::getAge)
-                .reduce(0, Integer::sum);
+                .average();
 
-        System.out.println("\nAverage age of everyone: " + ageSum / people.size());
+        System.out.printf("\nAverage age of everyone: %.0f\n", averageAge.getAsDouble());
 
         Optional<Person> youngestPerson = people.stream()
                 .min(Comparator.comparingInt(Person::getAge));
