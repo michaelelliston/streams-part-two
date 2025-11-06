@@ -14,9 +14,9 @@ public class Program {
         List<Person> people = new ArrayList<Person>(List.of(
                 new Person("Avery", "Bennett", 17),
                 new Person("Mateo", "Cortez", 22),
-                new Person("Maya", "Singh", 18),
+                new Person("Maya", "Singh", 28),
                 new Person("Elias", "Romero", 19),
-                new Person("Harper", "Nguyen", 24),
+                new Person("Harper", "Nguyen", 34),
                 new Person("Noah", "Patel", 28),
                 new Person("Isla", "Chen", 27),
                 new Person("Mateo", "Brooks", 25),
