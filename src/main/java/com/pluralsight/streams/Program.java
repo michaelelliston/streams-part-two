@@ -35,7 +35,12 @@ public class Program {
                 .mapToInt(Person::getAge)
                 .average();
 
-        System.out.printf("\nAverage age of everyone: %.0f\n", averageAge.getAsDouble());
+        try {
+
+            System.out.printf("\nAverage age of everyone: %.0f\n", averageAge.getAsDouble());
+        } catch (NoSuchElementException e) {
+            System.err.println("An error occurred: " + e);
+        }
 
         Optional<Person> youngestPerson = people.stream()
                 .min(Comparator.comparingInt(Person::getAge));
