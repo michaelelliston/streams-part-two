@@ -46,7 +46,10 @@ public class Program {
         System.out.println("Youngest person: " + youngestPerson.get());
         System.out.println("Oldest person: " + oldestPerson.get());
 
+        System.out.println();
+
         youngestPerson.ifPresent(System.out::println); // Testing other way to print the actual person object held inside the Optional<Person> type variable, checks if the variable is empty or not before printing
+        System.out.println((oldestPerson.orElse(new Person("This Should", "Never Happen", 404)))); // Attempts to print the person object held inside the Optional<Person> Variable, and if it fails, prints a different one
 
     }
 }
