@@ -2,9 +2,7 @@ package com.pluralsight.streams;
 
 import utilities.InputGetter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Program {
 
@@ -26,29 +24,29 @@ public class Program {
 
         String userInput = InputGetter.getString("Please enter the name you are searching for: ");
 
-        List<Person> filteredPeople = new ArrayList<Person>();
+        List<Person> filteredPeople = people.stream()
+                .filter(p -> p.getFirstName().equalsIgnoreCase(userInput) || p.getLastName().equalsIgnoreCase(userInput))
+                .toList();
 
-        for (Person person : people) {
-            if (person.getFirstName().equalsIgnoreCase(userInput) || person.getLastName().equalsIgnoreCase(userInput)) {
-                filteredPeople.add(person);
-            }
-        }
+        filteredPeople.stream()
+                .forEach(System.out::println);
 
-        for (Person person : filteredPeople) {
-            System.out.println(person);
-        }
-
-        int ageSum = 0;
-        for (Person person : people) {
-            ageSum += person.getAge();
-        }
+        int ageSum = people.stream()
+                .mapToInt(Person::getAge)
+                .reduce(0, Integer::sum);
 
         System.out.println("\nAverage age of everyone: " + ageSum / people.size());
 
-        Collections.sort(people);
+        Optional<Person> youngestPerson = people.stream()
+                .min(Comparator.comparingInt(Person::getAge));
 
-        System.out.println("Youngest person: " + people.get(0));
-        System.out.println("Oldest person: " + people.get(people.size() - 1));
+        Optional<Person> oldestPerson = people.stream()
+                .max(Comparator.comparingInt(Person::getAge));
+
+        System.out.println("Youngest person: " + youngestPerson.get());
+        System.out.println("Oldest person: " + oldestPerson.get());
+
+        youngestPerson.ifPresent(System.out::println); // Testing other way to print the actual person object held inside the Optional<Person> type variable, checks if the variable is empty or not before printing
 
     }
 }
